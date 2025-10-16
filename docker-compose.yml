@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  simplecron:
+    build: .
+    container_name: simplecron
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=info
+      - TIMEZONE=UTC
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "-e", "console.log('SimpleCron is running')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Example: Add a simple web server for health checks
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: simplecron-nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - simplecron
