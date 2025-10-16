@@ -202,16 +202,26 @@ Railway will automatically:
 # 1. Install Railway CLI
 npm install -g @railway/cli
 
-# 2. Login and create project
+# 2. Configure your endpoints
+cp .env.example .env
+# Edit .env with your endpoint configuration
+
+# 3. Deploy with one command
+./deploy-to-railway.sh
+```
+
+**Manual Railway Setup:**
+```bash
+# 1. Login and create project
 railway login
 railway init
 
-# 3. Set environment variables
-railway variables set ENDPOINT_1_NAME="my-cron"
-railway variables set ENDPOINT_1_URL="https://your-api.com/cron"
-railway variables set ENDPOINT_1_SCHEDULE="*/5 * * * *"
+# 2. Set environment variables
+railway variables --set ENDPOINT_1_NAME="my-cron"
+railway variables --set ENDPOINT_1_URL="https://your-api.com/cron"
+railway variables --set ENDPOINT_1_SCHEDULE="*/5 * * * *"
 
-# 4. Deploy
+# 3. Deploy
 railway up
 ```
 
