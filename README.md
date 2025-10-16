@@ -7,7 +7,15 @@
 
 A simple, flexible cron service for calling HTTP endpoints on schedule. Perfect for API health checks, data processing, cleanup tasks, and more.
 
-> **SimpleCron** makes it easy to schedule HTTP requests to any endpoint with retry logic, comprehensive logging, and flexible configuration.
+> **SimpleCron** is specifically designed for **Railway deployment** to easily set up cron jobs with custom API routes. It makes it easy to schedule HTTP requests to any endpoint with retry logic, comprehensive logging, and flexible configuration.
+
+## Why SimpleCron? 🤔
+
+- **Railway Optimized**: Built specifically for Railway's deployment model
+- **No Complex Setup**: Just set environment variables and deploy
+- **Custom API Routes**: Point to any HTTP endpoint for your cron jobs
+- **Reliable**: Built-in retry logic and error handling
+- **Monitoring**: Comprehensive logging and statistics
 
 ## Table of Contents
 
@@ -176,10 +184,36 @@ ENDPOINT_1_SCHEDULE=*/1 * * * *
 
 ## Deployment 🚀
 
-### Railway
-1. Connect your GitHub repo to Railway
-2. Set environment variables in Railway dashboard
-3. Deploy!
+### Railway (Recommended)
+SimpleCron is specifically designed for Railway deployment:
+
+1. **Connect your GitHub repo to Railway**
+2. **Set environment variables in Railway dashboard**
+3. **Deploy!**
+
+Railway will automatically:
+- Build and deploy your cron service
+- Keep it running 24/7
+- Handle restarts and scaling
+- Provide logs and monitoring
+
+**Quick Railway Setup:**
+```bash
+# 1. Install Railway CLI
+npm install -g @railway/cli
+
+# 2. Login and create project
+railway login
+railway init
+
+# 3. Set environment variables
+railway variables set ENDPOINT_1_NAME="my-cron"
+railway variables set ENDPOINT_1_URL="https://your-api.com/cron"
+railway variables set ENDPOINT_1_SCHEDULE="*/5 * * * *"
+
+# 4. Deploy
+railway up
+```
 
 ### Docker
 ```dockerfile
